@@ -1,0 +1,23 @@
+buildscript {
+    dependencies {
+        //TODO: change the gradle here also  differentiate between android build gradle vs app build gardle mahmoud 30/01/2025
+        classpath 'com.android.tools.build:gradle:8.4.2' // Or later version
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+rootProject.buildDir = "../build"
+subprojects{
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
